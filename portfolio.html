@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Likhith S Gowda - AI & Data Science Portfolio</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            brand: {
+              primary: '#4f46e5',
+              secondary: '#10b981',
+              dark: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Premium custom styles matching React code */
+    .blur-gradient-circle {
+      filter: blur(120px);
+      opacity: 0.15;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #4f46e5 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.12), 0 4px 12px -5px rgba(16, 185, 129, 0.05);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+    /* Simple dynamic logging animations */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 3s infinite;
+    }
+    /* Scrollbar style */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Print optimizations matching professional resume styling */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12px !important;
+      }
+      .print\:hidden {
+        display: none !important;
+      }
+      .print\:shadow-none {
+        box-shadow: none !important;
+        border: 1px solid #e2e8f0 !important;
+      }
+      .print\:p-0 {
+        padding: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans selection:bg-indigo-500 selection:text-white">
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <div class="flex-shrink-0 cursor-pointer flex items-center gap-2" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-emerald-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-indigo-600/15">
+            LG
+          </span>
+          <span class="font-display font-bold text-xl sm:text-2xl text-slate-900 tracking-tight">
+            Likhith S <span class="text-indigo-600">Gowda</span>
+          </span>
+        </div>
+
+        <!-- Desktop Links -->
+        <div class="hidden lg:flex items-center gap-1">
+          <a href="#hero" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all">Home</a>
+          <a href="#education" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all">Education</a>
+          <a href="#skills" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all">Skills</a>
+          <a href="#projects" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all">Projects</a>
+          <a href="#certifications" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all">Credentials</a>
+          <a href="#activities" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all">Activities</a>
+        </div>
+
+        <!-- Right Side CTA -->
+        <div class="hidden lg:block">
+          <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-dark hover:bg-indigo-600 text-white font-medium text-sm transition-all shadow-md active:scale-95">
+            <i data-lucide="phone" class="w-4 h-4"></i> Get in Touch
+          </a>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="flex lg:hidden">
+          <button id="mobile-toggle" class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+            <i id="menu-icon" data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Panel -->
+    <div id="mobile-panel" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-b border-slate-100 overflow-hidden transition-all duration-300">
+      <div class="px-2 pt-2 pb-4 space-y-1">
+        <a href="#hero" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl font-medium text-slate-600 hover:bg-slate-50">Home</a>
+        <a href="#education" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl font-medium text-slate-600 hover:bg-slate-50">Education</a>
+        <a href="#skills" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl font-medium text-slate-600 hover:bg-slate-50">Skills</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl font-medium text-slate-600 hover:bg-slate-50">Projects</a>
+        <a href="#certifications" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl font-medium text-slate-600 hover:bg-slate-50">Credentials</a>
+        <a href="#activities" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl font-medium text-slate-600 hover:bg-slate-50">Activities</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="block text-center mt-4 px-4 py-3 rounded-xl bg-brand-dark text-white font-medium"><i data-lucide="phone" class="w-4 h-4 inline mr-2"></i>Connect</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden bg-gradient-to-br from-indigo-50/40 via-slate-50 to-slate-50">
+    <div class="absolute top-1/4 left-10 w-96 h-96 bg-indigo-200/20 rounded-full blur-gradient-circle"></div>
+    <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-emerald-200/20 rounded-full blur-gradient-circle"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-30"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Welcome Details -->
+        <div class="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs sm:text-sm font-semibold tracking-wide">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Actively seeking AI & Data Science Internships
+          </div>
+
+          <div class="space-y-3 sm:space-y-4">
+            <p class="text-indigo-600 font-mono text-sm sm:text-base font-semibold tracking-wider uppercase">Hello World, I'm</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
+              Likhith S Gowda <br>
+              <span class="text-gradient">AI & Data Science</span> Student
+            </h1>
+          </div>
+
+          <p class="text-slate-600 text-base sm:text-lg max-w-2xl leading-relaxed">
+            Passionate and driven student at Sambhram Institute of Technology, actively pursuing a degree in AI & DS, where I combine theoretical knowledge with hands-on experience in software development. Deeply involved in various hackathons and technical projects to solve real-world industry scenarios.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#projects" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-medium text-sm sm:text-base transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-indigo-600/20 active:scale-95">
+              Explore Projects <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+            <button onclick="window.print()" class="px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 font-medium text-sm sm:text-base transition-all duration-300 flex items-center gap-2 shadow-sm active:scale-95">
+              <i data-lucide="printer" class="w-4 h-4 text-slate-500"></i> Print / Export CV
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-400 font-mono pt-4">
+            <i data-lucide="terminal" class="w-4 h-4 text-emerald-500"></i>
+            <span>Sambhram Institute of Tech &bull; Class of 2026</span>
+          </div>
+        </div>
+
+        <!-- Hero Card -->
+        <div class="lg:col-span-5 relative">
+          <div class="w-full max-w-md mx-auto bg-white/90 backdrop-blur-md rounded-2xl border border-slate-100 shadow-xl p-6 sm:p-8 space-y-6 sm:space-y-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50/50 rounded-bl-full -z-10"></div>
+            
+            <div class="space-y-1">
+              <p class="text-xs font-semibold text-indigo-600 uppercase font-mono tracking-wider">Contact Cards</p>
+              <h3 class="text-lg sm:text-xl font-display font-medium text-slate-900">Direct Communication</h3>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/50 border border-slate-100">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="p-2 sm:p-2.5 rounded-lg bg-indigo-50 text-indigo-600">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 font-sans uppercase block">Email</span>
+                    <a href="mailto:likhithsgowda11@gmail.com" class="text-xs sm:text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors">likhithsgowda11@gmail.com</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/50 border border-slate-100">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="p-2 sm:p-2.5 rounded-lg bg-indigo-50 text-indigo-600">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 font-sans uppercase block">Phone</span>
+                    <a href="tel:+917996502991" class="text-xs sm:text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors">+91 7996502991</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/50 border border-slate-100">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="p-2 sm:p-2.5 rounded-lg bg-indigo-50 text-indigo-600">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 font-sans uppercase block">Location</span>
+                    <span class="text-xs sm:text-sm font-semibold text-slate-700 block">Bengaluru, Karnataka, India</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100">
+              <a href="https://www.linkedin.com/in/likhith-s-gowda" target="_blank" class="w-full flex items-center justify-center gap-2 py-3.5 bg-indigo-50/50 hover:bg-indigo-600 hover:text-white text-indigo-700 font-semibold text-sm rounded-xl transition-all shadow-sm group">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                Connect on LinkedIn
+                <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-60"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EDUCATION SECTION ==================== -->
+  <section id="education" class="py-20 sm:py-28 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-24 space-y-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs sm:text-sm font-semibold tracking-wider uppercase font-mono">
+          <i data-lucide="graduation-cap" class="w-4 h-4"></i> academic logs
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+          Education & <span class="text-gradient">Milestones</span>
+        </h2>
+        <p class="text-slate-500 text-sm sm:text-base">An engineering record of institutions supporting my training in data systems and algorithm logic.</p>
+      </div>
+
+      <div class="relative max-w-4xl mx-auto">
+        <div class="absolute left-6 md:left-1/2 top-4 bottom-4 w-0.5 bg-slate-100 -translate-x-1/2"></div>
+
+        <div class="space-y-12 sm:space-y-16">
+          <!-- SIT -->
+          <div class="relative flex flex-col md:flex-row items-start md:justify-between md:flex-row-reverse">
+            <div class="absolute left-6 md:left-1/2 top-1.5 -translate-x-1/2 z-20">
+              <div class="w-8 h-8 rounded-full bg-indigo-600 border-4 border-white shadow-md flex items-center justify-center text-white text-xs font-bold">1</div>
+            </div>
+            <div class="hidden md:block w-5/12"></div>
+            <div class="w-full md:w-5/12 pl-12 md:pl-0">
+              <div class="card-hover p-6 rounded-2xl bg-slate-50/50 border border-slate-100 shadow-sm relative text-left">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 text-xs font-mono font-bold">2022 - 2026</span>
+                  <span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 text-xs font-semibold font-mono border border-emerald-100/30">CGPA: 7.5</span>
+                </div>
+                <h4 class="font-display font-bold text-slate-800 text-lg">B.E in Artificial Intelligence & DS</h4>
+                <p class="text-slate-500 text-sm mt-1">Sambhram Institute of Technology</p>
+                <p class="text-slate-500 text-xs leading-relaxed border-t border-slate-100 mt-3 pt-3">
+                  Undergoing extensive training in algorithm optimization, cloud data warehousing, neural structures, and relational SQL logic.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PUC -->
+          <div class="relative flex flex-col md:flex-row items-start md:justify-between">
+            <div class="absolute left-6 md:left-1/2 top-1.5 -translate-x-1/2 z-20">
+              <div class="w-8 h-8 rounded-full bg-indigo-600 border-4 border-white shadow-md flex items-center justify-center text-white text-xs font-bold">2</div>
+            </div>
+            <div class="hidden md:block w-5/12"></div>
+            <div class="w-full md:w-5/12 pl-12 md:pl-0">
+              <div class="card-hover p-6 rounded-2xl bg-slate-50/50 border border-slate-100 shadow-sm relative text-left">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 text-xs font-mono font-bold">2020 - 2022</span>
+                  <span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 text-xs font-semibold font-mono border border-emerald-100/30">83%</span>
+                </div>
+                <h4 class="font-display font-bold text-slate-800 text-lg">PUC - Science Stream (PCME)</h4>
+                <p class="text-slate-500 text-sm mt-1">HKS Pre-University College</p>
+                <p class="text-slate-500 text-xs leading-relaxed border-t border-slate-100 mt-3 pt-3">
+                  Core scientific principles with intensive focus on Calculus, Vector math, and Physics mechanics.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- School -->
+          <div class="relative flex flex-col md:flex-row items-start md:justify-between md:flex-row-reverse">
+            <div class="absolute left-6 md:left-1/2 top-1.5 -translate-x-1/2 z-20">
+              <div class="w-8 h-8 rounded-full bg-indigo-600 border-4 border-white shadow-md flex items-center justify-center text-white text-xs font-bold">3</div>
+            </div>
+            <div class="hidden md:block w-5/12"></div>
+            <div class="w-full md:w-5/12 pl-12 md:pl-0">
+              <div class="card-hover p-6 rounded-2xl bg-slate-50/50 border border-slate-100 shadow-sm relative text-left">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 text-xs font-mono font-bold">Graduated 2020</span>
+                  <span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 text-xs font-semibold font-mono border border-emerald-100/30">69%</span>
+                </div>
+                <h4 class="font-display font-bold text-slate-800 text-lg">Class X (CBSE)</h4>
+                <p class="text-slate-500 text-sm mt-1">Nitte International School</p>
+                <p class="text-slate-500 text-xs leading-relaxed border-t border-slate-100 mt-3 pt-3">
+                  Incepting mathematical skills and basic logic paradigms alongside active science labs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS & METERS ==================== -->
+  <section id="skills" class="py-20 sm:py-28 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-24 space-y-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 text-xs sm:text-sm font-semibold tracking-wider uppercase font-mono">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-emerald-600"></i> spectrum metric
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+          Engineering & <span class="text-gradient">Professional Skills</span>
+        </h2>
+        <p class="text-slate-500 text-sm sm:text-base">Meticulously maintained core competencies with quantified understanding indices.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Programming -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100/50">
+              <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="code-2" class="w-5 h-5"></i></div>
+              <h3 class="font-display font-bold text-slate-800 text-base sm:text-lg">Programming Languages</h3>
+            </div>
+            <div class="space-y-4 text-left">
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>Python</span><span>90%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 90%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>C++</span><span>80%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 80%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>C</span><span>75%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100/50">
+              <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="database" class="w-5 h-5"></i></div>
+              <h3 class="font-display font-bold text-slate-800 text-base sm:text-lg">Databases & Analytics</h3>
+            </div>
+            <div class="space-y-4 text-left">
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>MySQL</span><span>85%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 85%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>MongoDB</span><span>75%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 75%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>Power BI & Excel</span><span>85%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100/50">
+              <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
+              <h3 class="font-display font-bold text-slate-800 text-base sm:text-lg">Professional Competence</h3>
+            </div>
+            <div class="space-y-4 text-left">
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>Microsoft Azure</span><span>75%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 75%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>Critical Analysis</span><span>90%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 90%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                  <span>Team Collaboration</span><span>95%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-150 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600 rounded" style="width: 95%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DETAILED PROJECTS SIMULATORS ==================== -->
+  <section id="projects" class="py-20 sm:py-28 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 space-y-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs sm:text-sm font-semibold tracking-wider uppercase font-mono">
+          <i data-lucide="folder-git2" class="w-4 h-4"></i> code in action
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+          Applied <span class="text-gradient">Project Work & Simulators</span>
+        </h2>
+        <p class="text-slate-500 text-sm sm:text-base">Interact with live visual simulations demonstrating the back-end engineering loops of these academic projects.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-12 items-stretch">
+        
+        <!-- Interactive Project A: Stock Level Checker -->
+        <div class="lg:col-span-6 flex flex-col justify-between bg-slate-900 text-slate-100 rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-2xl">
+          <div class="space-y-6 text-left">
+            <div class="flex justify-between items-center border-b border-slate-850 pb-4">
+              <span class="text-xs font-mono text-indigo-400 font-bold uppercase tracking-wider">PROJECT 01</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono text-xs font-bold">PYTHON SCRIPT</span>
+            </div>
+            
+            <h3 class="text-2xl font-display font-extrabold">Product Availability Checker</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Developed an automated Python BeautifulSoup tracking environment to scrap and parse stock levels across multiple online retail marketplaces. Integrated customizable Power BI parameters for visual stock trend reports.
+            </p>
+
+            <div class="bg-slate-950 rounded-xl p-4 border border-slate-850">
+              <p class="text-xs text-slate-400 font-mono mb-2"><i data-lucide="terminal" class="w-3.5 h-3.5 inline mr-1 text-emerald-400"></i> RUNNING PREVIEW DEMO</p>
+              
+              <div class="space-y-3">
+                <div class="flex items-center justify-between text-xs font-mono">
+                  <span>Target Item: PS5 Pro</span>
+                  <button onclick="runPythonTracker()" class="px-3 py-1.5 bg-indigo-600 rounded text-white font-bold hover:bg-indigo-500 transition-colors uppercase text-[10px]">Execute Scraper</button>
+                </div>
+                
+                <div id="tracker-logs" class="h-28 overflow-y-auto bg-black p-3 rounded font-mono text-[10px] text-slate-300 space-y-1 text-left">
+                  Console ready. Run scraper to review stack trace...
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-850 mt-6 flex justify-between text-[11px] text-slate-400 font-mono">
+            <span>Tech: Beautiful Soup, Power BI</span>
+            <span>Completed 2024</span>
+          </div>
+        </div>
+
+        <!-- Interactive Project B: NLP Bot -->
+        <div class="lg:col-span-6 flex flex-col justify-between bg-white rounded-2xl border border-slate-150 p-6 sm:p-8 shadow-xl">
+          <div class="space-y-6 text-left">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+              <span class="text-xs font-mono text-indigo-600 font-bold uppercase tracking-wider">PROJECT 02</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50 text-indigo-600 font-mono text-xs font-bold">NLP BOT SIMULATOR</span>
+            </div>
+            
+            <h3 class="text-2xl font-display font-extrabold text-slate-905">Healthcare AI Chatbot</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Engineered dialog logic mapping client health questions to immediate medical database guidelines, streamlining appointments, schedule checking, and patient queries.
+            </p>
+
+            <!-- Mini Chat window -->
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-3">
+              <div id="chat-scroller" class="h-28 overflow-y-auto space-y-2 text-xs p-1">
+                <div class="text-left text-slate-500 font-mono text-[9px] mb-2 uppercase">Dialogue Thread</div>
+                <div class="bg-indigo-50 text-indigo-800 p-2 rounded-lg max-w-[85%] rounded-tl-none">
+                  Hello! I can answer standard queries, symptoms, or help schedule diagnostic clinic bookings. Ask me anything!
+                </div>
+              </div>
+
+              <!-- Message Form input -->
+              <div class="flex gap-2">
+                <input id="chat-input" placeholder="Type standard prompt like 'headache remedy'..." type="text" class="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg outline-none focus:border-indigo-500">
+                <button onclick="sendChatMessage()" class="p-2 bg-indigo-600 hover:bg-slate-900 text-white rounded-lg transition-colors"><i data-lucide="send" class="w-3.5 h-3.5"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-100 mt-6 flex justify-between text-[11px] text-slate-400 font-mono">
+            <span>Tech: NLP, Regex, Python</span>
+            <span>Completed 2024</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CREDENTIALS SECTION ==================== -->
+  <section id="certifications" class="py-20 sm:py-28 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-24 space-y-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs sm:text-sm font-semibold tracking-wider uppercase font-mono">
+          <i data-lucide="badge-check" class="w-4 h-4 text-indigo-600"></i> VERIFIED ACCREDITATIONS
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+          Certifications & <span class="text-gradient">Professional Training</span>
+        </h2>
+        <p class="text-slate-500 text-sm sm:text-base">Specialist certifications validating industry competence and hands-on systems expertise.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Azure -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-7 relative card-hover overflow-hidden text-left">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-indigo-50/50 rounded-bl-full pointer-events-none"></div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="cloud" class="w-5 h-5"></i></div>
+            <span class="text-xs font-mono text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> 2024</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-850 text-lg leading-snug">Azure Data Fundamentals</h3>
+          <p class="text-slate-500 text-xs mt-1">Conducted by Microsoft</p>
+          <div class="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between text-xs">
+            <span class="text-emerald-600 flex items-center gap-1 font-bold uppercase tracking-wider text-[9px]"><i data-lucide="check-circle2" class="w-3.5 h-3.5"></i> Credential Verified</span>
+            <span class="font-mono text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">ID: DP-900</span>
+          </div>
+        </div>
+
+        <!-- EBTS -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-7 relative card-hover overflow-hidden text-left">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-indigo-50/50 rounded-bl-full pointer-events-none"></div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="award" class="w-5 h-5"></i></div>
+            <span class="text-xs font-mono text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> 2024</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-850 text-lg leading-snug">Machine Learning Internship</h3>
+          <p class="text-slate-500 text-xs mt-1">Conducted by EBTS Systems</p>
+          <div class="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between text-xs">
+            <span class="text-emerald-600 flex items-center gap-1 font-bold uppercase tracking-wider text-[9px]"><i data-lucide="check-circle2" class="w-3.5 h-3.5"></i> Completed Project</span>
+            <span class="font-mono text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">EBTS-ML-2024</span>
+          </div>
+        </div>
+
+        <!-- Ybi -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-7 relative card-hover overflow-hidden text-left">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-indigo-50/50 rounded-bl-full pointer-events-none"></div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="brain-circuit" class="w-5 h-5"></i></div>
+            <span class="text-xs font-mono text-slate-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> 2023</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-850 text-lg leading-snug">AI & Data Skills Training</h3>
+          <p class="text-slate-500 text-xs mt-1">Conducted by Ybi Foundation</p>
+          <div class="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between text-xs">
+            <span class="text-emerald-600 flex items-center gap-1 font-bold uppercase tracking-wider text-[9px]"><i data-lucide="check-circle2" class="w-3.5 h-3.5"></i> Training Verified</span>
+            <span class="font-mono text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">YBI-AI-DS-2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HACKATHONS SECTION ==================== -->
+  <section id="activities" class="py-20 sm:py-28 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 space-y-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 text-xs sm:text-sm font-semibold tracking-wider uppercase font-mono">
+          <i data-lucide="trophy" class="w-4 h-4 text-emerald-600"></i> competitive experience
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+          Hackathons & <span class="text-gradient">Co-Curricular Challenges</span>
+        </h2>
+        <p class="text-slate-500 text-sm sm:text-base">Developing rapid, high-pressure prototype solution pitches under strict developer constraints.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
+        <!-- Hackathon 1 -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-lg shadow-slate-100/50 p-6 sm:p-8 relative overflow-hidden card-hover">
+          <div class="flex items-center justify-between mb-5">
+            <span class="p-3 bg-amber-50 text-amber-500 rounded-xl border border-amber-100"><i data-lucide="flame" class="w-5 h-5"></i></span>
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded font-mono text-[10px] font-bold">24 HOURS</span>
+          </div>
+          <h3 class="font-display font-extrabold text-slate-900 text-lg sm:text-xl">National-Level Hackathon Participant</h3>
+          <p class="text-xs font-bold text-indigo-600 font-mono tracking-wider uppercase mt-1">BIT College</p>
+          <p class="text-slate-500 text-xs sm:text-sm mt-3 leading-relaxed">
+            Collaborated alongside a 4-person tech team to architect, document, and present a functional localized web utility resolving resource allocation.
+          </p>
+        </div>
+
+        <!-- Hackathon 2 -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-lg shadow-slate-100/50 p-6 sm:p-8 relative overflow-hidden card-hover">
+          <div class="flex items-center justify-between mb-5">
+            <span class="p-3 bg-indigo-50 text-indigo-500 rounded-xl border border-indigo-100"><i data-lucide="lightbulb" class="w-5 h-5"></i></span>
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded font-mono text-[10px] font-bold">8 HOURS</span>
+          </div>
+          <h3 class="font-display font-extrabold text-slate-900 text-lg sm:text-xl">8-Hour Hack-a-Idea Sprint</h3>
+          <p class="text-xs font-bold text-indigo-600 font-mono tracking-wider uppercase mt-1">Atria College</p>
+          <p class="text-slate-500 text-xs sm:text-sm mt-3 leading-relaxed">
+            Pitched rapid architectural concepts streamlining local diagnostic databases under active engineering mentor analysis reviews.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT DISPATCH ==================== -->
+  <section id="contact" class="py-20 sm:py-28 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs sm:text-sm font-semibold tracking-wider uppercase font-mono">
+          <i data-lucide="inbox" class="w-4 h-4"></i> connect
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight mt-3">
+          Get in Touch & <span class="text-gradient">Collaborate</span>
+        </h2>
+        <p class="text-slate-500 text-sm sm:text-base mt-2">Send an instant secure mock message directly to my developer database logs.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-5xl mx-auto items-stretch">
+        <!-- Direct -->
+        <div class="lg:col-span-5 flex flex-col justify-between bg-slate-900 text-slate-100 rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-2xl">
+          <div class="space-y-6 text-left">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">CONNECT CHANNELS</span>
+            <h4 class="font-display font-extrabold text-xl">Let's coordinate on intelligent systems.</h4>
+            <div class="space-y-4 pt-4">
+              <a href="mailto:likhithsgowda11@gmail.com" class="flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl hover:bg-slate-800/80 transition-colors">
+                <div class="p-2 bg-indigo-550/10 text-indigo-400"><i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i></div>
+                <div class="min-w-0">
+                  <span class="text-[9px] uppercase tracking-wider text-slate-400 block font-mono">Email Address</span>
+                  <span class="text-xs sm:text-sm font-semibold text-slate-200 block truncate">likhithsgowda11@gmail.com</span>
+                </div>
+              </a>
+              <a href="tel:+917996502991" class="flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl hover:bg-slate-800/80 transition-colors">
+                <div class="p-2 bg-indigo-550/10 text-indigo-400"><i data-lucide="phone" class="w-5 h-5 flex-shrink-0"></i></div>
+                <div>
+                  <span class="text-[9px] uppercase tracking-wider text-slate-400 block font-mono">Call</span>
+                  <span class="text-xs sm:text-sm font-semibold text-slate-200 block truncate">+91 7996502991</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-800 mt-8">
+            <a href="https://www.linkedin.com/in/likhith-s-gowda" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold uppercase tracking-wider text-xs transition-colors text-white"><i data-lucide="linkedin" class="w-4 h-4"></i> View LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-xl text-left">
+          <form onsubmit="submitContactForm(event)" class="space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="text-[10px] text-slate-400 font-mono">Your Name</label>
+                <input required id="form-name" placeholder="Name" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 focus:border-indigo-500 p-3 rounded-lg outline-none transition-colors">
+              </div>
+              <div class="space-y-1">
+                <label class="text-[10px] text-slate-400 font-mono">Email Address</label>
+                <input required id="form-email" type="email" placeholder="email@example.com" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 focus:border-indigo-500 p-3 rounded-lg outline-none transition-colors">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] text-slate-400 font-mono">Message Summary</label>
+              <textarea required id="form-msg" rows="4" placeholder="Brief details regarding recruitment, project work, etc." class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 focus:border-indigo-500 p-3 rounded-lg outline-none transition-colors resize-none"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 bg-brand-dark hover:bg-indigo-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all"><i data-lucide="send" class="w-4 h-4"></i> Dispatch Simulated Mail</button>
+          </form>
+          <div id="form-feedback" class="hidden mt-4 bg-emerald-50 border border-emerald-100 p-4 rounded-xl text-emerald-800 text-xs text-center">
+            🎉 Message successfully simulated & stored in browser caches!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 border-t border-slate-800 py-12 text-slate-500 text-xs font-mono print:hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+      <p>&copy; <span id="current-year"></span> Likhith S Gowda. All rights reserved.</p>
+      <p class="flex items-center justify-center gap-1"><i data-lucide="code-2" class="w-4 h-4 text-indigo-500"></i> Pure self-contained HTML/CSS rendering</p>
+    </div>
+  </footer>
+
+
+  <!-- ==================== SCRIPTS & INTERACTION LOGIC ==================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Set Current Year in Footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Scroll Sticky Bar styling
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 20) {
+        nav.classList.remove('bg-transparent');
+        nav.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-slate-100');
+      } else {
+        nav.classList.add('bg-transparent');
+        nav.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-slate-100');
+      }
+    });
+
+    // Mobile Panel toggle helper
+    const mobileBtn = document.getElementById('mobile-toggle');
+    const mobilePanel = document.getElementById('mobile-panel');
+    mobileBtn.addEventListener('click', () => {
+      mobilePanel.classList.toggle('hidden');
+    });
+    function toggleMobileMenu() {
+      mobilePanel.classList.add('hidden');
+    }
+
+    // Interactive Python Logs script
+    function runPythonTracker() {
+      const logs = document.getElementById('tracker-logs');
+      logs.innerHTML = '';
+      const stepTrace = [
+        '[INIT] Launching python bs4 environments...',
+        '[FETCH] Connecting to https://www.amazon.in/dp/example-ps5...',
+        '[HTML] Parsing amazon metadata using visual lxml trees...',
+        '[FETCH] Mapping prices to Microsoft SQL Server/Excel tables...',
+        '[SUCCESS] Current amazon metrics resolved: IN_STOCK at $699 USD!'
+      ];
+      let i = 0;
+      const hInterval = setInterval(() => {
+        if(i < stepTrace.length) {
+          const p = document.createElement('p');
+          p.textContent = stepTrace[i];
+          if(stepTrace[i].includes('SUCCESS')) {
+            p.className = 'text-emerald-400 font-bold';
+          }
+          logs.appendChild(p);
+          logs.scrollTop = logs.scrollHeight;
+          i++;
+        } else {
+          clearInterval(hInterval);
+        }
+      }, 500);
+    }
+
+    // Chatbot response simulator helper
+    function sendChatMessage() {
+      const inp = document.getElementById('chat-input');
+      const scroller = document.getElementById('chat-scroller');
+      const val = inp.value.trim();
+      if(!val) return;
+
+      // Append User node
+      const uDiv = document.createElement('div');
+      uDiv.className = 'bg-indigo-600 text-white p-2 rounded-lg max-w-[85%] rounded-tr-none ml-auto text-right text-xs';
+      uDiv.textContent = val;
+      scroller.appendChild(uDiv);
+      inp.value = '';
+
+      // Append dynamic AI Response
+      setTimeout(() => {
+        const botDiv = document.createElement('div');
+        botDiv.className = 'bg-slate-150 text-slate-700 p-2 rounded-lg max-w-[85%] rounded-tl-none font-sans text-xs';
+        
+        const norm = val.toLowerCase();
+        if(norm.includes('remedy') || norm.includes('headache') || norm.includes('fever')) {
+          botDiv.textContent = "For mild discomforts, standard guidance values rest, high fluid hydration, and diagnostic consulting checks if headache lasts over 48 hours.";
+        } else if(norm.includes('likhith') || norm.includes('gowda')) {
+          botDiv.textContent = "Likhith S Gowda is an AI & DS Engineer student with strong credentials in Python, C++, MySQL, Azure, and hackathon prototypes.";
+        } else {
+          botDiv.textContent = "Appointment schedule is ready. Recommend confirming on Likhith's official LinkedIn profile connection linked on hero panels!";
+        }
+        scroller.appendChild(botDiv);
+        scroller.scrollTop = scroller.scrollHeight;
+      }, 800);
+    }
+
+    // Dispatch feedback helper
+    function submitContactForm(e) {
+      e.preventDefault();
+      document.getElementById('form-name').value = '';
+      document.getElementById('form-email').value = '';
+      document.getElementById('form-msg').value = '';
+      const feedback = document.getElementById('form-feedback');
+      feedback.classList.remove('hidden');
+      setTimeout(() => {
+        feedback.classList.add('hidden');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
